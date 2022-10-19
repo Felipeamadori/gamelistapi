@@ -1,5 +1,6 @@
 package com.example.gamelistapi.dto;
 
+import com.example.gamelistapi.model.Usuario;
 import lombok.*;
 
 @Data

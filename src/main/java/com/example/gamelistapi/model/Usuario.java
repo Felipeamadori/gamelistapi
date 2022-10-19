@@ -1,7 +1,9 @@
 package com.example.gamelistapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 import lombok.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,8 +18,10 @@ import java.util.List;
 public class Usuario implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_usuario;
+    @NotNull
     private String nome;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
     private String senha;
     private String email;
     private String datanasc;
@@ -58,5 +62,9 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UsernamePasswordAuthenticationToken toAuth() {
+        return new UsernamePasswordAuthenticationToken(email, senha);
     }
 }
