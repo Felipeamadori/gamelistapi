@@ -1,5 +1,6 @@
 package com.example.gamelistapi.controller;
 
+import com.example.gamelistapi.dto.TokenDto;
 import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.service.JWTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,12 @@ public class LoginController {
     private JWTokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> autenticar(@RequestBody Usuario usuario) {
+    public ResponseEntity<TokenDto> autenticar(@RequestBody Usuario usuario) {
         UsernamePasswordAuthenticationToken dadosAuth = usuario.toAuth();
         try {
             Authentication authentication = authManager.authenticate(dadosAuth);
             String token = tokenService.makeToken(authentication);
-            System.out.println(token);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().build();
         }

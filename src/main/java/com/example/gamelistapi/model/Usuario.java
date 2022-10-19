@@ -1,5 +1,6 @@
 package com.example.gamelistapi.model;
 
+import com.example.gamelistapi.dto.UsuarioDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -66,5 +67,8 @@ public class Usuario implements UserDetails {
 
     public UsernamePasswordAuthenticationToken toAuth() {
         return new UsernamePasswordAuthenticationToken(email, senha);
+    }
+    public UsuarioDto toUsuarioDto() {
+        return new UsuarioDto(id_usuario,nome,email,datanasc);
     }
 }

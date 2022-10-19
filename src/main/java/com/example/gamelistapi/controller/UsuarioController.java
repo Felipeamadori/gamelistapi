@@ -22,10 +22,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Usuario> createUser(@Valid @RequestBody Usuario usuario, UriComponentsBuilder uriBuilder) throws Exception {
+    public ResponseEntity<UsuarioDto> createUser(@Valid @RequestBody Usuario usuario, UriComponentsBuilder uriBuilder) throws Exception {
         try {
-            Usuario u = usuarioService.createUser(usuario);
-            u.setSenha(null);
+            UsuarioDto u = usuarioService.createUser(usuario).toUsuarioDto();
             URI uri = uriBuilder.path("usuario/{id}").buildAndExpand(u.getId_usuario()).toUri();
             return ResponseEntity.created(uri).body(u);
         } catch (Exception e) {
