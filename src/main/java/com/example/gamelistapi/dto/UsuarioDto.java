@@ -1,9 +1,11 @@
 package com.example.gamelistapi.dto;
 
+import com.example.gamelistapi.model.Usuario;
 import lombok.*;
 
 @Data
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioDto {

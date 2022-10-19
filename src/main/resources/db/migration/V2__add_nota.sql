@@ -1,0 +1,1 @@
+ALTER TABLE usuario_games ADD COLUMN nota int, ADD COLUMN comentario text;
