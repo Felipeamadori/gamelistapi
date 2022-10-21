@@ -3,6 +3,7 @@ package com.example.gamelistapi.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "games")
@@ -18,4 +19,6 @@ public class Games {
     private String categ;
     private String genres;
     private String urlMedia;
+    @OneToMany(mappedBy = "usuario")
+    Set<UsuarioGames> usuarioGames;
 }

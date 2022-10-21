@@ -14,6 +14,12 @@ import javax.persistence.*;
 public class UsuarioGames {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_usuario_games;
-    private int id_usuario;
-    private int id_game;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "id_game")
+    private Games game;
+    private int nota;
+    private String comentario;
 }
