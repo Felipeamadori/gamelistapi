@@ -87,11 +87,6 @@
 				</executions>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5433/gameslist-db</url>
-					<user>postgres</user>
-					<password>1234</password>
-					<baselineOnMigrate>true</baselineOnMigrate>
-					<schemas>public</schemas>
 					<locations>
 						<location>
 							filesystem:src/main/resources/db/migration
