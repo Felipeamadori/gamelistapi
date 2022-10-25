@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,8 +26,11 @@ public class Usuario implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull
     private String senha;
+    @Email
     private String email;
     private String datanasc;
+    @Transient
+    private String accessToken;
     @Transient
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Permissao> permissoes = new ArrayList<>();
