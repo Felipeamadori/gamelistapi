@@ -1,5 +1,6 @@
 package com.example.gamelistapi.model;
 
+import com.example.gamelistapi.dto.GamesDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,4 +27,8 @@ public class Games {
 
     @OneToMany(mappedBy = "usuario")
     Set<UsuarioGames> usuarioGames;
+
+    public GamesDto toGamesDto() {
+        return new GamesDto(id_game,appid,name,categ,genres,urlMedia,positive_rating,negative_rating,description);
+    }
 }

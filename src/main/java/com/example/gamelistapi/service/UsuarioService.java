@@ -1,6 +1,8 @@
 package com.example.gamelistapi.service;
 
 import com.example.gamelistapi.model.Usuario;
+import com.example.gamelistapi.model.UsuarioGames;
+import com.example.gamelistapi.repository.UsuarioGamesRepository;
 import com.example.gamelistapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,22 @@ import java.util.Optional;
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioGamesRepository usuarioGamesRepository;
     BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
 
     public Usuario createUser(Usuario usuario) throws Exception {
         try {
             usuario.setSenha(passEncoder.encode(usuario.getSenha()));
             return usuarioRepository.save(usuario);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public UsuarioGames addGame(UsuarioGames ug) throws Exception{
+        try {
+            return usuarioGamesRepository.save(ug);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
