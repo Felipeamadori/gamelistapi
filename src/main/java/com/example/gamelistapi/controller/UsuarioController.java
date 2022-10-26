@@ -45,5 +45,15 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDto> getGameById(@PathVariable int id) throws Exception {
+        try {
+            UsuarioDto u = usuarioService.getById(id);
+            return ResponseEntity.ok().body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
 }
