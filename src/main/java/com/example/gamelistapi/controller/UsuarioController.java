@@ -28,7 +28,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDto> createUser(@Valid @RequestBody Usuario usuario, UriComponentsBuilder uriBuilder) throws Exception {
         try {
             UsuarioDto u = usuarioService.createUser(usuario).toUsuarioDto();
-            URI uri = uriBuilder.path("usuario/{id}").buildAndExpand(u.getId_usuario()).toUri();
+            URI uri = uriBuilder.path("usuario/{id}").buildAndExpand(u.getId()).toUri();
             return ResponseEntity.created(uri).body(u);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -46,7 +46,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDto> getGameById(@PathVariable int id) throws Exception {
+    public ResponseEntity<UsuarioDto> getGameById(@PathVariable Long id) throws Exception {
         try {
             UsuarioDto u = usuarioService.getById(id);
             return ResponseEntity.ok().body(u);

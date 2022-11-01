@@ -15,20 +15,28 @@ import java.util.Set;
 @AllArgsConstructor
 public class Games {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_game;
-    private int appid;
+    private Long id;
+    private Long appid;
+    @Column(columnDefinition = "TEXT")
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String categ;
+    @Column(columnDefinition = "TEXT")
     private String genres;
+    @Column(columnDefinition = "TEXT")
     private String urlMedia;
-    private int positive_rating;
-    private int negative_rating;
+    private int positiveRating;
+    private int negativeRating;
+    @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(columnDefinition = "TEXT")
+    private String shortDescription;
 
     @OneToMany(mappedBy = "usuario")
     Set<UsuarioGames> usuarioGames;
 
     public GamesDto toGamesDto() {
-        return new GamesDto(id_game,appid,name,categ,genres,urlMedia,positive_rating,negative_rating,description);
+        return new GamesDto(id,appid,name,categ,genres,urlMedia,positiveRating,negativeRating,description);
     }
 }

@@ -17,7 +17,7 @@ public class GamesService {
     private GamesRepository gamesRepository;
 
     @Transactional
-    public GamesDto getById(int id) throws Exception{
+    public GamesDto getById(Long id) throws Exception{
         try {
             return gamesRepository.findById(id).get().toGamesDto();
         } catch (Exception e) {

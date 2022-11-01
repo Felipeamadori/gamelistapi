@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface GamesRepository extends JpaRepository<Games, Integer> {
-    @Override
-    Optional<Games> findById(Integer integer);
-
+public interface GamesRepository extends JpaRepository<Games, Long> {
     Page<Games> findByNameContainingIgnoreCase(String nameGame, Pageable pagination);
 }

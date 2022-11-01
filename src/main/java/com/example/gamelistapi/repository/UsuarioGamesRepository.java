@@ -6,11 +6,5 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface UsuarioGamesRepository extends JpaRepository<UsuarioGames, Integer> {
-
-    @Query(nativeQuery = true,value = "INSERT INTO usuario_games (id_usuario_games,id_game,id_usuario) " +
-            "VALUES (DEFAULT, :idGame, :idUser);")
-    void addGame(int idGame, int idUser);
-
-
+public interface UsuarioGamesRepository extends JpaRepository<UsuarioGames, Long> {
 }
