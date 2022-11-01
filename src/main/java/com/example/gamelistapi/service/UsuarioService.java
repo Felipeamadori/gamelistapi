@@ -40,7 +40,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioDto getById(int id) throws Exception{
+    public UsuarioDto getById(Long id) throws Exception{
         try {
             return usuarioRepository.findById(id).get().toUsuarioDto();
         } catch (Exception e) {

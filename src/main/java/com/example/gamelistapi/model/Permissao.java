@@ -16,7 +16,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Permissao implements GrantedAuthority {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_permissao;
+    private int id;
     private String permissao;
 
     @Override

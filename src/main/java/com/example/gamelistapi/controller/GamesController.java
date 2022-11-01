@@ -26,7 +26,7 @@ public class GamesController {
     private GamesRepository gamesRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<GamesDto> getGameById(@PathVariable int id) throws Exception {
+    public ResponseEntity<GamesDto> getGameById(@PathVariable Long id) throws Exception {
         try {
             GamesDto g = gamesService.getById(id);
             return ResponseEntity.ok().body(g);

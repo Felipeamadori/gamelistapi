@@ -20,7 +20,7 @@ import java.util.Set;
 @Data @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Usuario implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_usuario;
+    private Long id;
     @NotNull
     private String nome;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -76,6 +76,6 @@ public class Usuario implements UserDetails {
         return new UsernamePasswordAuthenticationToken(email, senha);
     }
     public UsuarioDto toUsuarioDto() {
-        return new UsuarioDto(id_usuario,nome,email,datanasc);
+        return new UsuarioDto(id,nome,email,datanasc);
     }
 }
