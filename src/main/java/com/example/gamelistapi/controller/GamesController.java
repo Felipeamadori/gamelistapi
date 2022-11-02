@@ -34,6 +34,15 @@ public class GamesController {
             throw new Exception(e.getMessage());
         }
     }
+    @PostMapping("/by-name")
+    public ResponseEntity<List<GamesDto>> getGameByName(@RequestBody String name) throws Exception {
+        try {
+            List<GamesDto> g = gamesService.getByName(name);
+            return ResponseEntity.ok().body(g);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
     @GetMapping()
     public Page<GamesDto> listaGames(@RequestParam(required = false) String nameGame,

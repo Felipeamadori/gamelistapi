@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GamesService {
@@ -20,6 +21,15 @@ public class GamesService {
     public GamesDto getById(Long id) throws Exception{
         try {
             return gamesRepository.findById(id).get().toGamesDto();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<GamesDto> getByName(String name) throws Exception {
+        try {
+            return gamesRepository.findGamesByName(name).stream().map(Games::toGamesDto).collect(Collectors.toList());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

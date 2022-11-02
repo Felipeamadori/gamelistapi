@@ -13,4 +13,7 @@ public class UsuarioDto {
     private String nome;
     private String email;
     private String datanasc;
+    private String phpUrl;
+    private String bio;
+    private String joinDate;
 }

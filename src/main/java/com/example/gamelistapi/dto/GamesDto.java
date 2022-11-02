@@ -22,6 +22,7 @@ public class GamesDto {
     private int positiveRating;
     private int negativeRating;
     private String description;
+    private String shortDescription;
 
     public GamesDto(Games game) {
         this.id = game.getId();
@@ -30,9 +31,10 @@ public class GamesDto {
         this.categ = game.getCateg();
         this.genres = game.getGenres();
         this.urlMedia = game.getUrlMedia();
-        this.positiveRating = getPositiveRating();
+        this.positiveRating = game.getPositiveRating();
         this.negativeRating = game.getNegativeRating();
         this.description = game.getDescription();
+        this.shortDescription = game.getShortDescription();
     }
 
     public static Page<GamesDto> toGamesDto(Page<Games> games) {

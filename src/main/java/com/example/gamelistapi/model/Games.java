@@ -37,6 +37,6 @@ public class Games {
     Set<UsuarioGames> usuarioGames;
 
     public GamesDto toGamesDto() {
-        return new GamesDto(id,appid,name,categ,genres,urlMedia,positiveRating,negativeRating,description);
+        return new GamesDto(id,appid,name,categ,genres,urlMedia,positiveRating,negativeRating,description,shortDescription);
     }
 }

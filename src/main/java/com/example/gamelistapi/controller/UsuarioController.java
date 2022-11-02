@@ -1,5 +1,6 @@
 package com.example.gamelistapi.controller;
 
+import com.example.gamelistapi.dto.GamesDto;
 import com.example.gamelistapi.dto.UsuarioDto;
 import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.model.UsuarioGames;
@@ -11,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
@@ -46,10 +48,20 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDto> getGameById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<UsuarioDto> getUserById(@PathVariable Long id) throws Exception {
         try {
             UsuarioDto u = usuarioService.getById(id);
             return ResponseEntity.ok().body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GetMapping("/games/{id}")
+    public ResponseEntity<List<GamesDto>> getAllGamesByUserId(@PathVariable Long id) throws Exception {
+        try {
+            List<GamesDto> games = usuarioService.getAllGamesByUserId(id);
+            return ResponseEntity.ok().body(games);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

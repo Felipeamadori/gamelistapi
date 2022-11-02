@@ -31,6 +31,12 @@ public class Usuario implements UserDetails {
     private String datanasc;
     @Transient
     private String accessToken;
+
+    private String pfpUrl;
+
+    private String bio;
+
+    private String joinDate;
     @Transient
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Permissao> permissoes = new ArrayList<>();
@@ -76,6 +82,6 @@ public class Usuario implements UserDetails {
         return new UsernamePasswordAuthenticationToken(email, senha);
     }
     public UsuarioDto toUsuarioDto() {
-        return new UsuarioDto(id,nome,email,datanasc);
+        return new UsuarioDto(id,nome,email,datanasc,pfpUrl,bio,joinDate);
     }
 }

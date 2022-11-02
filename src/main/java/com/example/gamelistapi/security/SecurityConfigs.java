@@ -39,9 +39,11 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
             http.cors().and().authorizeHttpRequests().
                 antMatchers(HttpMethod.POST,"/login").permitAll().
                 antMatchers(HttpMethod.POST, "/usuario/cadastrar").permitAll().
-                antMatchers(HttpMethod.GET,"/usuario/*").permitAll().
+                antMatchers(HttpMethod.GET,"/usuario/**").permitAll().
                 antMatchers(HttpMethod.GET,"/games").permitAll().
                 antMatchers(HttpMethod.GET,"/games/*").permitAll().
+                antMatchers(HttpMethod.POST,"/games/*").permitAll().
+                antMatchers(HttpMethod.POST,"/usuario/*").permitAll().
                 anyRequest().authenticated().
                 and().csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
