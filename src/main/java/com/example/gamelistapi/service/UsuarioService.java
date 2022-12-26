@@ -67,4 +67,12 @@ public class UsuarioService {
             throw new Exception(e.getMessage());
         }
     }
+    @Transactional
+    public void removeGame(UsuarioGames usuarioGames) throws Exception {
+        try {
+            usuarioGamesRepository.removeGame(usuarioGames.getGame().getId(), usuarioGames.getUsuario().getId());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

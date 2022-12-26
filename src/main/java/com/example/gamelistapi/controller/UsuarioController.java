@@ -67,5 +67,15 @@ public class UsuarioController {
         }
     }
 
+    @DeleteMapping("/remover-game")
+    public ResponseEntity<String> removeGame(@RequestBody UsuarioGames usuarioGames) throws Exception {
+        try {
+            usuarioService.removeGame(usuarioGames);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
 }
