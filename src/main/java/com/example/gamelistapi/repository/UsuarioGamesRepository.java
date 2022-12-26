@@ -2,6 +2,7 @@ package com.example.gamelistapi.repository;
 
 import com.example.gamelistapi.dto.GamesDto;
 import com.example.gamelistapi.model.Games;
+import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.model.UsuarioGames;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.SQLDelete;
@@ -22,6 +23,7 @@ public interface UsuarioGamesRepository extends JpaRepository<UsuarioGames, Long
                     "where u.id = :id ")
     List<Long> findAllByUserId(@Param("id") Long id);
 
+    List<UsuarioGames> findUsuarioGamesByUsuario(Usuario usuario);
     @Modifying
     @Query(nativeQuery = true,
         value = "delete " +

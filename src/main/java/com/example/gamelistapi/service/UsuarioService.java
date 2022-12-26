@@ -2,6 +2,7 @@ package com.example.gamelistapi.service;
 
 import com.example.gamelistapi.dto.GamesDto;
 import com.example.gamelistapi.dto.UsuarioDto;
+import com.example.gamelistapi.dto.UsuarioGamesDto;
 import com.example.gamelistapi.model.Games;
 import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.model.UsuarioGames;
@@ -56,7 +57,7 @@ public class UsuarioService {
         }
     }
 
-    @Transactional
+    /*@Transactional
     public List<GamesDto> getAllGamesByUserId(Long id) throws Exception {
         try {
             List<Long> ids = usuarioGamesRepository.findAllByUserId(id);
@@ -66,11 +67,32 @@ public class UsuarioService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }*/
+
+    @Transactional
+    public List<UsuarioGamesDto> getAllGamesByUserId(Long id) throws Exception {
+        try {
+            Usuario usuario = usuarioRepository.findById(id).get();
+            List<UsuarioGamesDto> games = new ArrayList<>();
+            usuarioGamesRepository.findUsuarioGamesByUsuario(usuario)
+                    .forEach(usuarioGames -> games.add(usuarioGames.toUsuarioGamesDto()));
+            return games;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
     @Transactional
     public void removeGame(UsuarioGames usuarioGames) throws Exception {
         try {
             usuarioGamesRepository.removeGame(usuarioGames.getGame().getId(), usuarioGames.getUsuario().getId());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public UsuarioGames addReview(UsuarioGames usuarioGames) throws Exception {
+        try {
+            return usuarioGamesRepository.save(usuarioGames);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

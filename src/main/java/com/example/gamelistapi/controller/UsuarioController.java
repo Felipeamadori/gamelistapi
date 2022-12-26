@@ -2,6 +2,7 @@ package com.example.gamelistapi.controller;
 
 import com.example.gamelistapi.dto.GamesDto;
 import com.example.gamelistapi.dto.UsuarioDto;
+import com.example.gamelistapi.dto.UsuarioGamesDto;
 import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.model.UsuarioGames;
 import com.example.gamelistapi.service.UsuarioService;
@@ -38,10 +39,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/adicionar-game")
-    public ResponseEntity<UsuarioGames> addGame(@RequestBody UsuarioGames usuarioGames, UriComponentsBuilder uriBuilder) throws Exception {
+    public ResponseEntity<UsuarioGamesDto> addGame(@RequestBody UsuarioGames usuarioGames, UriComponentsBuilder uriBuilder) throws Exception {
         try {
             UsuarioGames u = usuarioService.addGame(usuarioGames);
-            return ResponseEntity.ok().body(u);
+            return ResponseEntity.ok().body(u.toUsuarioGamesDto());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -58,9 +59,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/games/{id}")
-    public ResponseEntity<List<GamesDto>> getAllGamesByUserId(@PathVariable Long id) throws Exception {
+    public ResponseEntity<List<UsuarioGamesDto>> getAllGamesByUserId(@PathVariable Long id) throws Exception {
         try {
-            List<GamesDto> games = usuarioService.getAllGamesByUserId(id);
+            List<UsuarioGamesDto> games = usuarioService.getAllGamesByUserId(id);
             return ResponseEntity.ok().body(games);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -72,6 +73,16 @@ public class UsuarioController {
         try {
             usuarioService.removeGame(usuarioGames);
             return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @PostMapping("/adicionar-review")
+    public ResponseEntity<UsuarioGamesDto> addReview(@RequestBody UsuarioGames usuarioGames) throws Exception {
+        try {
+            UsuarioGames u = usuarioService.addReview(usuarioGames);
+            return ResponseEntity.ok().body(u.toUsuarioGamesDto());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
