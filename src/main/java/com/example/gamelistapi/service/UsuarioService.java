@@ -81,6 +81,8 @@ public class UsuarioService {
             throw new Exception(e.getMessage());
         }
     }
+
+
     @Transactional
     public void removeGame(UsuarioGames usuarioGames) throws Exception {
         try {

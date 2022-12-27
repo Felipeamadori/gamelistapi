@@ -24,6 +24,10 @@ public interface UsuarioGamesRepository extends JpaRepository<UsuarioGames, Long
     List<Long> findAllByUserId(@Param("id") Long id);
 
     List<UsuarioGames> findUsuarioGamesByUsuario(Usuario usuario);
+
+    List<UsuarioGames> findUsuarioGamesByGame(Games game);
+
+
     @Modifying
     @Query(nativeQuery = true,
         value = "delete " +

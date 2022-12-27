@@ -42,6 +42,8 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
                 antMatchers(HttpMethod.GET,"/usuario/**").permitAll().
                 antMatchers(HttpMethod.GET,"/games").permitAll().
                 antMatchers(HttpMethod.GET,"/games/*").permitAll().
+                antMatchers(HttpMethod.GET,"/games/recuperar-review/").permitAll().
+                antMatchers(HttpMethod.GET,"/games/recuperar-review/*").permitAll().
                 antMatchers(HttpMethod.POST,"/games/*").permitAll().
                 antMatchers(HttpMethod.POST,"/usuario/*").permitAll().
                 antMatchers(HttpMethod.DELETE, "/usuario/*").permitAll().
