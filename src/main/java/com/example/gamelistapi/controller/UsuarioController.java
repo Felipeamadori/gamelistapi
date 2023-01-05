@@ -38,6 +38,17 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/atualizar-cadastro")
+    public ResponseEntity<UsuarioDto> updateUser(@Valid @RequestBody Usuario usuario, UriComponentsBuilder uriBuilder) throws Exception {
+        try {
+            UsuarioDto u = usuarioService.updateUser(usuario).toUsuarioDto();
+            URI uri = uriBuilder.path("usuario/{id}").buildAndExpand(u.getId()).toUri();
+            return ResponseEntity.created(uri).body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @PostMapping("/adicionar-game")
     public ResponseEntity<UsuarioGamesDto> addGame(@RequestBody UsuarioGames usuarioGames, UriComponentsBuilder uriBuilder) throws Exception {
         try {

@@ -40,6 +40,15 @@ public class UsuarioService {
         }
     }
 
+    @Transactional
+    public Usuario updateUser(Usuario usuario) throws Exception {
+        try {
+            return usuarioRepository.save(usuario);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     public UsuarioGames addGame(UsuarioGames ug) throws Exception{
         try {
             return usuarioGamesRepository.save(ug);

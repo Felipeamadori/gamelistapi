@@ -12,7 +12,6 @@ public class UsuarioDto {
     private Long id;
     private String nome;
     private String email;
-    private String datanasc;
     private String pfpUrl;
     private String bio;
     private String joinDate;

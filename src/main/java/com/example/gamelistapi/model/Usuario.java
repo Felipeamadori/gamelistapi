@@ -82,6 +82,6 @@ public class Usuario implements UserDetails {
         return new UsernamePasswordAuthenticationToken(email, senha);
     }
     public UsuarioDto toUsuarioDto() {
-        return new UsuarioDto(id,nome,email,datanasc,pfpUrl,bio,joinDate);
+        return new UsuarioDto(id,nome,email,pfpUrl,bio,joinDate);
     }
 }
