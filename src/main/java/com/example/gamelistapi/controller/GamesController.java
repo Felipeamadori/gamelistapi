@@ -35,6 +35,20 @@ public class GamesController {
         }
     }
 
+
+    @GetMapping("/genres")
+    public Page<GamesDto> listaGamesGenres (@RequestParam(required = false) String genres,
+             @PageableDefault(sort="genres", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
+        Page<Games> games;
+        if(genres == null ){
+            games = gamesRepository.findAll(pagination);
+        }
+        else{
+            games = gamesRepository.findByGenresContainingIgnoreCase(genres, pagination);
+        }
+        return GamesDto.toGamesDto(games);
+    }
+
     @GetMapping()
     public Page<GamesDto> listaGames(@RequestParam(required = false) String nameGame,
                                      @PageableDefault(sort="name", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
