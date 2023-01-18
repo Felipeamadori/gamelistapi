@@ -27,7 +27,6 @@ public interface UsuarioGamesRepository extends JpaRepository<UsuarioGames, Long
 
     List<UsuarioGames> findUsuarioGamesByGame(Games game);
 
-
     @Modifying
     @Query(nativeQuery = true,
         value = "delete " +
