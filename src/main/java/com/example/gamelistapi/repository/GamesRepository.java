@@ -11,19 +11,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
-
-public interface GamesRepository extends JpaRepository<Games, Integer> {
 
 @Repository
 @EnableJpaRepositories
 public interface GamesRepository extends JpaRepository<Games, Long> {
-
-    @Override
-    Optional<Games> findById(Integer integer);
-    
     
 
     Page<Games> findByGenresContainingIgnoreCase(String genres, Pageable pagination);
