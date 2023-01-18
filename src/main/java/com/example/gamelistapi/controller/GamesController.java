@@ -1,7 +1,9 @@
 package com.example.gamelistapi.controller;
 
 import com.example.gamelistapi.dto.GamesDto;
+import com.example.gamelistapi.dto.UsuarioGamesDto;
 import com.example.gamelistapi.model.Games;
+import com.example.gamelistapi.model.UsuarioGames;
 import com.example.gamelistapi.repository.GamesRepository;
 import com.example.gamelistapi.service.GamesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,20 @@ public class GamesController {
         }
     }
 
+
+    @GetMapping("/genres")
+    public Page<GamesDto> listaGamesGenres (@RequestParam(required = false) String genres,
+             @PageableDefault(sort="genres", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
+        Page<Games> games;
+        if(genres == null ){
+            games = gamesRepository.findAll(pagination);
+        }
+        else{
+            games = gamesRepository.findByGenresContainingIgnoreCase(genres, pagination);
+        }
+        return GamesDto.toGamesDto(games);
+    }
+
     @GetMapping()
     public Page<GamesDto> listaGames(@RequestParam(required = false) String nameGame,
                                      @PageableDefault(sort="name", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
@@ -56,6 +72,16 @@ public class GamesController {
         }
         return GamesDto.toGamesDto(games);
 
+    }
+
+    @GetMapping("/recuperar-review/{id}")
+    public ResponseEntity<List<UsuarioGamesDto>> getReviews(@PathVariable Long id) throws Exception {
+        try {
+            List<UsuarioGamesDto> u = gamesService.getAllReviewsByGameId(id);
+            return ResponseEntity.ok().body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

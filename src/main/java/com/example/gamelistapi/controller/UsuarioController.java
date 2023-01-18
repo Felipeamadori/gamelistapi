@@ -38,6 +38,16 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/atualizar-cadastro")
+    public ResponseEntity<UsuarioDto> updateUser(@Valid @RequestBody Usuario usuario) throws Exception {
+        try {
+            usuarioService.updateUser(usuario);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @PostMapping("/adicionar-game")
     public ResponseEntity<UsuarioGamesDto> addGame(@RequestBody UsuarioGames usuarioGames, UriComponentsBuilder uriBuilder) throws Exception {
         try {
