@@ -15,12 +15,23 @@ import java.util.Map;
 import java.util.Optional;
 
 
+public interface GamesRepository extends JpaRepository<Games, Integer> {
+
 @Repository
 @EnableJpaRepositories
 public interface GamesRepository extends JpaRepository<Games, Long> {
-    Page<Games> findByNameContainingIgnoreCase(String nameGame, Pageable pagination);
+
+    @Override
+    Optional<Games> findById(Integer integer);
+    
+    
+
+    Page<Games> findByGenresContainingIgnoreCase(String genres, Pageable pagination);
+
     @Query(nativeQuery = true,
             value = "select * from games g where g.name ilike concat('%',:name,'%')")
     List<Games> findGamesByName(@Param("name") String name);
+    
+    Page<Games> findByNameContainingIgnoreCase(String nameGame, Pageable pagination);
 
 }
