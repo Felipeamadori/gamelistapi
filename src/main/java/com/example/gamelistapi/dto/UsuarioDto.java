@@ -9,8 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioDto {
-    private int id_usuario;
+    private Long id;
     private String nome;
     private String email;
     private String datanasc;
+    private String pfpUrl;
+    private String bio;
+    private String joinDate;
 }

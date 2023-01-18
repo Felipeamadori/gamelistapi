@@ -15,6 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -33,10 +36,17 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().
+            http.cors().and().authorizeHttpRequests().
                 antMatchers(HttpMethod.POST,"/login").permitAll().
+                antMatchers(HttpMethod.POST, "/usuario/cadastrar").permitAll().
+                antMatchers(HttpMethod.GET,"/usuario/**").permitAll().
                 antMatchers(HttpMethod.GET,"/games").permitAll().
                 antMatchers(HttpMethod.GET,"/games/*").permitAll().
+                antMatchers(HttpMethod.GET,"/games/recuperar-review/").permitAll().
+                antMatchers(HttpMethod.GET,"/games/recuperar-review/*").permitAll().
+                antMatchers(HttpMethod.POST,"/games/*").permitAll().
+                antMatchers(HttpMethod.POST,"/usuario/*").permitAll().
+                antMatchers(HttpMethod.DELETE, "/usuario/*").permitAll().
                 anyRequest().authenticated().
                 and().csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
@@ -50,5 +60,17 @@ public class SecurityConfigs extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authService).passwordEncoder(new BCryptPasswordEncoder());
+    }
+    @Bean
+    public CorsFilter corsFilter() {
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOriginPattern("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return new CorsFilter(source);
     }
 }

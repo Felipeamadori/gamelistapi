@@ -1,7 +1,9 @@
 package com.example.gamelistapi.controller;
 
 import com.example.gamelistapi.dto.GamesDto;
+import com.example.gamelistapi.dto.UsuarioGamesDto;
 import com.example.gamelistapi.model.Games;
+import com.example.gamelistapi.model.UsuarioGames;
 import com.example.gamelistapi.repository.GamesRepository;
 import com.example.gamelistapi.service.GamesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,18 @@ public class GamesController {
     private GamesRepository gamesRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<GamesDto> getGameById(@PathVariable int id) throws Exception {
+    public ResponseEntity<GamesDto> getGameById(@PathVariable Long id) throws Exception {
         try {
             GamesDto g = gamesService.getById(id);
+            return ResponseEntity.ok().body(g);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    @PostMapping("/by-name")
+    public ResponseEntity<List<GamesDto>> getGameByName(@RequestBody String name) throws Exception {
+        try {
+            List<GamesDto> g = gamesService.getByName(name);
             return ResponseEntity.ok().body(g);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -61,6 +72,16 @@ public class GamesController {
         }
         return GamesDto.toGamesDto(games);
 
+    }
+
+    @GetMapping("/recuperar-review/{id}")
+    public ResponseEntity<List<UsuarioGamesDto>> getReviews(@PathVariable Long id) throws Exception {
+        try {
+            List<UsuarioGamesDto> u = gamesService.getAllReviewsByGameId(id);
+            return ResponseEntity.ok().body(u);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

@@ -23,7 +23,7 @@ public class JWTokenService {
 
         return Jwts.builder()
                 .setIssuer("API Gameslist")
-                .setSubject(String.valueOf(logado.getId_usuario()))
+                .setSubject(String.valueOf(logado.getId()))
                 .setIssuedAt(today)
                 .setExpiration(dataExpiracao)
                 .signWith(SignatureAlgorithm.HS256, secret)
@@ -38,7 +38,7 @@ public class JWTokenService {
         }
     }
 
-    public int getIdUsuario(String token) {
-        return Integer.parseInt(Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody().getSubject());
+    public Long getIdUsuario(String token) {
+        return Long.parseLong(Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody().getSubject());
     }
 }

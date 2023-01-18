@@ -32,7 +32,7 @@ public class AuthValidationFilter extends OncePerRequestFilter {
     }
 
     private void authenticateUser(String token) {
-        int idUsuario = jwTokenService.getIdUsuario(token);
+        Long idUsuario = jwTokenService.getIdUsuario(token);
         Usuario usuario = usuarioRepository.findById(idUsuario).get();
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);

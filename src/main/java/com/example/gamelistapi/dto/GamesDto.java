@@ -13,26 +13,28 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GamesDto {
-    private int id_game;
-    private int appid;
+    private Long id;
+    private Long appid;
     private String name;
     private String categ;
     private String genres;
     private String urlMedia;
-    private int positive_rating;
-    private int negative_rating;
+    private int positiveRating;
+    private int negativeRating;
     private String description;
+    private String shortDescription;
 
     public GamesDto(Games game) {
-        this.id_game = game.getId_game();
+        this.id = game.getId();
         this.appid = game.getAppid();
         this.name = game.getName();
         this.categ = game.getCateg();
         this.genres = game.getGenres();
         this.urlMedia = game.getUrlMedia();
-        this.positive_rating = getPositive_rating();
-        this.negative_rating = game.getNegative_rating();
+        this.positiveRating = game.getPositiveRating();
+        this.negativeRating = game.getNegativeRating();
         this.description = game.getDescription();
+        this.shortDescription = game.getShortDescription();
     }
 
     public static Page<GamesDto> toGamesDto(Page<Games> games) {
