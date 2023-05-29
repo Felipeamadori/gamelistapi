@@ -40,8 +40,8 @@ public class Usuario implements UserDetails {
     @Transient
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Permissao> permissoes = new ArrayList<>();
-    @OneToMany(mappedBy = "game")
-    Set<UsuarioGames> usuarioGames;
+    /*@OneToMany(mappedBy = "game")
+    Set<UsuarioGames> usuarioGames;*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
