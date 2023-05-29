@@ -1,16 +1,14 @@
 package com.example.gamelistapi.service;
 
-import com.example.gamelistapi.dto.GamesDto;
 import com.example.gamelistapi.dto.UsuarioDto;
 import com.example.gamelistapi.dto.UsuarioGamesDto;
-import com.example.gamelistapi.model.Games;
 import com.example.gamelistapi.model.Usuario;
 import com.example.gamelistapi.model.UsuarioGames;
 import com.example.gamelistapi.repository.GamesRepository;
 import com.example.gamelistapi.repository.UsuarioGamesRepository;
 import com.example.gamelistapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +16,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -35,6 +32,15 @@ public class UsuarioService {
         try {
             usuario.setSenha(passEncoder.encode(usuario.getSenha()));
             return usuarioRepository.save(usuario);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public void updateUser(Usuario usuario) throws Exception {
+        try {
+            usuarioRepository.updateUserInfo(usuario.getId(), usuario.getNome(), usuario.getBio(), usuario.getPfpUrl());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -81,6 +87,8 @@ public class UsuarioService {
             throw new Exception(e.getMessage());
         }
     }
+
+
     @Transactional
     public void removeGame(UsuarioGames usuarioGames) throws Exception {
         try {
