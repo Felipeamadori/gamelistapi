@@ -48,9 +48,9 @@ public class GamesController {
 
 
     @GetMapping("/genres")
-    public Page<GamesDto> listaGamesGenres (@RequestParam(required = false) String genres,
-             @PageableDefault(sort="genres", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
+    public Page<GamesDto> listaGamesGenres (@RequestParam(required = false) String genres, @RequestParam int page){
         Page<Games> games;
+        Pageable pagination = PageRequest.of(page, 15);
         if(genres == null ){
             games = gamesRepository.findAll(pagination);
         }
@@ -61,9 +61,9 @@ public class GamesController {
     }
 
     @GetMapping()
-    public Page<GamesDto> listaGames(@RequestParam(required = false) String nameGame,
-                                     @PageableDefault(sort="name", direction= Sort.Direction.ASC, page =0, size = 15) Pageable pagination){
+    public Page<GamesDto> listaGames(@RequestParam(required = false) String nameGame, @RequestParam int page){
         Page<Games> games;
+        Pageable pagination = PageRequest.of(page, 15);
         if(nameGame == null ){
             games = gamesRepository.findAll(pagination);
         }
