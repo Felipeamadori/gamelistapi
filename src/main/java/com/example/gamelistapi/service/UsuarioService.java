@@ -38,6 +38,15 @@ public class UsuarioService {
     }
 
     @Transactional
+    public List<Usuario> getAll() throws Exception {
+        try {
+            return usuarioRepository.findAll();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
     public void updateUser(Usuario usuario) throws Exception {
         try {
             usuarioRepository.updateUserInfo(usuario.getId(), usuario.getNome(), usuario.getBio(), usuario.getPfpUrl());

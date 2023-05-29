@@ -14,17 +14,22 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
-    @Autowired
 
     @GetMapping
-    public String Hello() {
-        return "Hello";
+    public List<UsuarioDto> getAll() throws Exception {
+        try {
+            List<Usuario> u = usuarioService.getAll();
+            return u.stream().map(Usuario::toUsuarioDto).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @PostMapping("/cadastrar")
