@@ -8,6 +8,7 @@ import com.example.gamelistapi.repository.FollowRepository;
 import com.example.gamelistapi.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,11 +37,11 @@ public class FollowController {
         }
     }
 
-    @PostMapping("/unfollow")
-    public ResponseEntity<?> unfollowUser(@RequestBody Follow follow) throws Exception {
+    @DeleteMapping("/unfollow")
+    @Transactional
+    public void unfollowUser(@RequestBody Follow follow) throws Exception {
         try {
-            followRepository.delete(follow);
-            return ResponseEntity.ok("Entity deleted");
+            followRepository.unfollow(follow.getFollowe().getId(), follow.getFollowing().getId());
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(e.getMessage());
