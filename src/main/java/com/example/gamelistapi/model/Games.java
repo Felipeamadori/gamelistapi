@@ -33,8 +33,8 @@ public class Games {
     @Column(columnDefinition = "TEXT")
     private String shortDescription;
 
-    @OneToMany(mappedBy = "usuario")
-    Set<UsuarioGames> usuarioGames;
+    /*@OneToMany(mappedBy = "usuario")
+    Set<UsuarioGames> usuarioGames;*/
 
     public GamesDto toGamesDto() {
         return new GamesDto(id,appid,name,categ,genres,urlMedia,positiveRating,negativeRating,description,shortDescription);
